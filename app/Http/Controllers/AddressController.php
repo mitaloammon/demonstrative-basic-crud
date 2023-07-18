@@ -28,7 +28,12 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        //
+        try {
+            $address = Address::create($request->all());
+            return response()->json($address, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failure to create address'], 500);
+        }
     }
 
     /**
